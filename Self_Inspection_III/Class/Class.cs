@@ -130,19 +130,20 @@ namespace Self_Inspection_III.Class
     {
         //Constant
         public const string Server_GaryPath = @"";
-        public const string Server_ERequestPath = @"";
+        public const string Server_ERequestPath = @"\\silver\聯合製造中心\產工\ATS 資料備份\ATS User Mars\Self_Inspection(E_Request)";
         public const string Local_bin = @"..\bin";
+        public const string Local_debug = @"..\bin\Debug";
         public const string Self_Inspection = "Self_Inspection";
 
         //Local
         public static string Local_VersionTxt = Path.Combine(Local_bin, "Version.txt");
         public static string Local_SystemXml = Path.Combine(Local_bin, "System.xml");
-        public static string Local_UpdateApp = Path.Combine(Local_bin, $"{Self_Inspection}_UpdateApp");
+        public static string Local_UpdateApp = @".\UpdateApp_SI_III.exe";
 
         //Server
         public static string Server_SlnBackUp = Path.Combine(Server_GaryPath, @"Backup");
         public static string Server_ExeBackUp = Path.Combine(Server_ERequestPath, @"Backup");
-        public static string Server_UpdateFile = Path.Combine(Server_ERequestPath, @"更新軟體");
+        public static string Server_UpdateFile = Path.Combine(Server_ERequestPath, @"更新檔案");
         public static string Server_SIExe = Path.Combine(Server_ERequestPath, $"{Self_Inspection}.exe");
         public static string Server_VersionTxt = Path.Combine(Server_ERequestPath, "Version.txt");
         public static string Server_UpdateApp = Path.Combine(Server_ERequestPath, $"{Self_Inspection}_UpdateApp");

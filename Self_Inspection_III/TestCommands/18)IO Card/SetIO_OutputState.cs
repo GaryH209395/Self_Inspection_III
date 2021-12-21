@@ -18,16 +18,9 @@ namespace Self_Inspection_III.TestCommands.IO_Card
             DeviceType = DeviceTypes.IO_Card;
             Parameters = new List<Parameter>()
             {                
-                new Parameter("Specific index of IO Card", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox,""),
+                //new Parameter("Specific index of IO Card", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox,""),
                 new Parameter("Specific bit(4~n)", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox, "Note that the first 3 bits are reserved for system use."),
-                new Parameter("Output state", DataTypes.String, ParaTypes.Constant, ConstTypes.ComboList, "0:low, 1:high")
-                {
-                    EnumItems = new EnumItem[]
-                    {
-                        new EnumItem("LOW", "False"),
-                        new EnumItem("HIGH", "True")
-                    }
-                }
+                new Parameter("Output state", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox, "0:low, 1:high")               
             };
         }
         
@@ -40,12 +33,12 @@ namespace Self_Inspection_III.TestCommands.IO_Card
             m_dev = DASK.Register_Card(Card_Type, 0);
             if (m_dev < 0){                
                 Console.WriteLine("Register_Card error!");
-            }           
+            }
 
             //***  Setting CardNumber/Port/Switch  ***//
-            ushort CardNumber = Convert.ToUInt16(para[0]);
-            byte[] Port = Encoding.UTF8.GetBytes(para[1]);
-            uint Switch = Convert.ToUInt16(para[2]);
+            ushort CardNumber = Convert.ToUInt16(Vars.GetValue(para[0]));
+            byte[] Port = Encoding.UTF8.GetBytes(Vars.GetValue(para[1]));
+            uint Switch = Convert.ToUInt16(Vars.GetValue(para[2]));
 
             //*****************************// 
             //*        DO_WritePort       *//

@@ -323,6 +323,11 @@ namespace Self_Inspection_III.SP
                                 if (isStop) { StopMsg = "Program Stop!"; return isStop; }
                                 string key = $"{dgvSPDeviceList[(int)ColSPDevice.ModelName, i].Value}-{dgvSPDeviceList[(int)ColSPDevice.No, i].Value}";
                                 ColorText connectResult;
+                                if (DeviceDB.GetType(dgvSPDeviceList[(int)ColSPDevice.ModelName, i].Value) == DeviceTypes.IO_Card)
+                                {
+                                    connectResult = ColorText.Pass;
+                                }
+                                else
                                 if (deviceUsed.Exists(x => x == key))
                                 {
                                     connectResult = CheckConnect(i, ref driverInfo, ref ConnectFailMsg);

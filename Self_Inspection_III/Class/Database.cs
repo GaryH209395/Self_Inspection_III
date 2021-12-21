@@ -572,7 +572,7 @@ namespace Self_Inspection_III.Class
                 new Column(Col.Type, "VARCHAR", 30, false, false)
             };
         }
-        public static DeviceTypes GetType(string ModelName)
+        public static DeviceTypes GetType(object ModelName)
         {
             Console.WriteLine($"==DeviceDB.GetType({ModelName})==");
             using (MySqlConnection Conn = new MySqlConnection(ConnectInfo))

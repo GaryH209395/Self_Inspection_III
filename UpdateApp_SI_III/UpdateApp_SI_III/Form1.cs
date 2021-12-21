@@ -22,7 +22,7 @@ namespace UpdateApp_SI_III
         private void Form1_Shown(object sender, EventArgs e)
         {
             DirectoryInfo ServerUpdateDir = new DirectoryInfo(@"\\silver\聯合製造中心\產工\ATS 資料備份\ATS User Mars\Self_Inspection(E_Request)\Self_Inspection_III\bin\Debug");
-            DirectoryInfo LocalUpdateDir = new DirectoryInfo(@"C:\Program Files (x86)\Chroma\Self_Inspection_III\bin\Debug");
+            DirectoryInfo LocalUpdateDir = new DirectoryInfo(@"..\Debug");
             string SI_3 = "Self_Inspection_III";
 
             try
@@ -42,15 +42,10 @@ namespace UpdateApp_SI_III
                     try
                     {
                         FileInfo fiLocal = new FileInfo(Path.Combine(LocalUpdateDir.FullName, fi.Name));
-                        Console.WriteLine(fiLocal.FullName);
-                        if (fiLocal.Exists)
-                            if (fiLocal.LastWriteTime < fi.LastWriteTime)
-                            {
-                                Console.WriteLine($"Copy: {fi.FullName}\nTo: {fiLocal.FullName}");
-                                fi.CopyTo(fiLocal.FullName, true);
-                            }
+                        Console.WriteLine($"Copy: {fi.FullName}\nTo: {fiLocal.FullName}");
+                        fi.CopyTo(fiLocal.FullName, true);
                     }
-                    catch { }
+                    catch(Exception ex) { Console.WriteLine(ex); }
                 }
 
                 Process P_Start = new Process();

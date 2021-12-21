@@ -252,7 +252,7 @@ namespace Self_Inspection_III
                         // 將新檔複製至更新檔案夾
                         foreach (FileInfo fi in new DirectoryInfo(Environment.CurrentDirectory).GetFiles())
                         {
-                            if (fi.Name.Contains(Paths.Self_Inspection) && !fi.Name.Contains(".lnk"))
+                            if (!fi.Name.Contains(".lnk"))
                             {
                                 string serverPath = Path.Combine(Paths.Server_UpdateFile, fi.Name);
                                 Console.WriteLine($"Copy {fi.FullName}\nTo {serverPath}");
@@ -274,7 +274,8 @@ namespace Self_Inspection_III
                         if (File.Exists(Paths.Server_UpdateApp))
                         {
                             //更新Local_UpdateApp
-                            File.Copy(Paths.Server_UpdateApp, Paths.Local_UpdateApp, true);
+                            foreach (FileInfo file in new DirectoryInfo(Path.Combine(Paths.Server_ERequestPath, "更新軟體")).GetFiles())
+                                file.CopyTo(Path.Combine(Paths.Local_debug, file.Name), true);
                             try
                             {
                                 Process[] ps = Process.GetProcesses();
@@ -295,7 +296,7 @@ namespace Self_Inspection_III
                             P_Update.Start();
 
                             //關閉程式
-                            Close();
+                           Close();
                         }
                     }
                     catch

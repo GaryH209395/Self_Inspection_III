@@ -8,6 +8,7 @@ using Self_Inspection_III.TestCommands.Command_ReadWrite;
 using Self_Inspection_III.TestCommands.DC_Source;
 using Self_Inspection_III.TestCommands.DMM;
 using Self_Inspection_III.TestCommands.Fluke;
+using Self_Inspection_III.TestCommands.IO_Card;
 using Self_Inspection_III.TestCommands.Miscellaneous;
 using Self_Inspection_III.TestCommands.PowerMeter;
 using Self_Inspection_III.TestCommands.StringFunc;
@@ -277,6 +278,10 @@ namespace Self_Inspection_III.TestCommands
                 case "SetFluke_OutputState2": return new SetFluke_OutputState2();
                 case "SetFluke_OutputValue": return new SetFluke_OutputValue();
                 case "WriteFluke_Command": return new WriteFluke_Command();
+                #endregion
+
+                #region IO Card
+                case "SetIO_OutputState": return new SetIO_OutputState();
                 #endregion
 
                 default: throw new Exception("Error Test Command");

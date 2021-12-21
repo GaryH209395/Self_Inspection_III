@@ -15,7 +15,7 @@ namespace Self_Inspection_III.TestCommands.IO_Card
         public SetIO_OutputState()
         {
             Name = "SetIO_OutputState";
-            //DeviceType = DeviceTypes.IO_Card;
+            DeviceType = DeviceTypes.IO_Card;
             Parameters = new List<Parameter>()
             {                
                 new Parameter("Specific index of IO Card", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox,""),

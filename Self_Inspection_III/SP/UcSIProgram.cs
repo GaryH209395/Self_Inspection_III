@@ -35,6 +35,7 @@ namespace Self_Inspection_III.SP
         private ProgramDB ProgramDB = new ProgramDB();
         private ItemDB ItemDB = new ItemDB();
         private ResultDB ResultDB = new ResultDB();
+        private IOCardDB IOCardDB = new IOCardDB();
 
         #endregion
 
@@ -360,36 +361,42 @@ namespace Self_Inspection_III.SP
 
                             WriteLine($"Do: {func.TestCommand} ({func.Parameter})");
 
+                            string modelName = func.Device.Split('-')[0];
+                            bool isIOCard = DeviceDB.GetType(modelName) == DeviceTypes.IO_Card;
+
                             #region Find Device
                             CviVisaCtrl niDriver = _NIDriver["*"];
-                            try
+                            if (!isIOCard)
                             {
-                                switch (func.Device)
+                                try
                                 {
-                                    case "Source":
-                                        niDriver = _NIDriver[thisItem.Source];
-                                        func.Device = thisItem.Source;
-                                        break;
-                                    case "Meter":
-                                        niDriver = _NIDriver[thisItem.Meter];
-                                        func.Device = thisItem.Meter;
-                                        break;
-                                    default:
-                                        if (!string.IsNullOrEmpty(func.Device))
-                                            niDriver = _NIDriver[func.Device];
-                                        break;
+                                    switch (func.Device)
+                                    {
+                                        case "Source":
+                                            niDriver = _NIDriver[thisItem.Source];
+                                            func.Device = thisItem.Source;
+                                            break;
+                                        case "Meter":
+                                            niDriver = _NIDriver[thisItem.Meter];
+                                            func.Device = thisItem.Meter;
+                                            break;
+                                        default:
+                                            if (!string.IsNullOrEmpty(func.Device))
+                                                niDriver = _NIDriver[func.Device];
+                                            break;
+                                    }
+                                }
+                                catch (KeyNotFoundException knfEx)
+                                {
+                                    Console.WriteLine(knfEx.ToString());
+                                    MessageBox.Show($"{func.Device} not connected.\nPlease check.");
                                 }
                             }
-                            catch (KeyNotFoundException knfEx)
-                            {
-                                Console.WriteLine(knfEx.ToString());
-                                MessageBox.Show($"{func.Device} not connected.\nPlease check.");
-                            }
                             #endregion
-
-                            if (DeviceDB.GetType(func.Device) == DeviceTypes.IO_Card)
+                         
+                            if (isIOCard)
                             {
-                                if (TestCommand.DoIOFunction(func, IOCardDB.Get_IOCard(func.Device), ref tempVars))
+                                if (TestCommand.DoIOFunction(func, IOCardDB.Get_IOCard(modelName), ref tempVars))
                                 {
                                     PF = ColorText.Error;
                                     StopMsg = $"Function Error:\n {func.TestCommand}({func.Parameter}) at line {funcIdx}";

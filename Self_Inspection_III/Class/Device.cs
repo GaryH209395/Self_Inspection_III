@@ -174,6 +174,7 @@ namespace Self_Inspection_III.Class
         Fluke,
         Load,
         Fixture,
+        IO_Card,
         Null,
         All
     }

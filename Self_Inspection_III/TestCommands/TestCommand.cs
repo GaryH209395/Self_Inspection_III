@@ -113,6 +113,41 @@ namespace Self_Inspection_III.TestCommands
         {
             return Function(ParaString, ModelName, NIDriver, ref Vars);
         }
+        protected virtual bool Function(string ParaString, string ModelName, ushort Card_Type, ref ItemVars Vars) { return false; }
+        public static bool DoIOFunction(SI_TestFunction Func, ushort Card_Type, ref ItemVars Vars)
+        {
+            try
+            {
+                TestCommand testCommand = TC(Func.TestCommand);
+
+                Console.WriteLine($"=={testCommand.Name}.Function({Func.Parameter}, {Func.Device}, NIDriver, Vars)==");
+                try
+                {
+                    return testCommand.Function(Func.Parameter, Func.Device, Card_Type, ref Vars);
+                }
+                catch (NullReferenceException nrEx)
+                {
+                    testCommand.ShowException(nrEx);
+                }
+                catch (Exception ex)
+                {
+                    if (Regex.IsMatch(ex.Message, "格式|No read value"))
+                        throw new Exception("No read value from " + Func.Device);
+                    else
+                        testCommand.ShowException(ex);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                if (Regex.IsMatch(ex.Message, "格式|No read value"))
+                    throw new Exception("No read value from " + Func.Device);
+                else
+                    MessageBox.Show(ex.ToString());
+            }
+            return true;
+        }
         public static bool DoFunction(SI_TestFunction Func, CviVisaCtrl NIDriver, ref ItemVars Vars)
         {
             // Return: true: Fail/Error; false: Pass

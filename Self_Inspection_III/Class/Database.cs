@@ -1113,6 +1113,33 @@ namespace Self_Inspection_III.Class
         }
     }
 
+    class IOCardDB : Database
+    {
+        public IOCardDB()
+        {
+            Table_Name = "IO_Card_Type";
+            Columns = new Column[2]
+            {
+                new Column("CardTypeName", "VARCHAR", 30, false, false),
+                new Column("CardTypeValue", "INT", 10, false, false)
+            };
+        }
+        public ushort Get_IOCard(string CardTypeName)
+        {
+            using (MySqlConnection Conn = new MySqlConnection(ConnectInfo))
+            {
+                try
+                {
+                    Conn.Open();
+                    CreateTableIfNotExists(Conn, Table_Name, Columns);
+                    string cmd = $"SELECT `CardTypeValue` FROM `{Schema_Table}` WHERE `CardTypeName` LIKE '{CardTypeName}'";
+                    return ushort.Parse(new MySqlCommand(cmd, Conn).ExecuteScalar().ToString());
+                }
+                catch (Exception ex) { Console.WriteLine(ex.ToString()); return 0; }
+                finally { Conn.Close(); } //關閉資料庫                
+            }
+        }
+    }
     class Column
     {
         private string name;

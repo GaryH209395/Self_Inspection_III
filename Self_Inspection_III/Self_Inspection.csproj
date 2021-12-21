@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C394548B-FD0D-4511-96B9-AE3DE3343102}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Self_Inspection_III</RootNamespace>
+    <AssemblyName>Self_Inspection_III</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon-20181222010917545.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ChromaSajetConnect">
+      <HintPath>..\..\..\MFG System\MFGSystem\Assembly\ChromaSajetConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="CviVisaDriver">
+      <HintPath>..\..\Self_Inspection_II\CviVisaDriver\bin\x86\Debug\CviVisaDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\MFG System\MFGSystem\Assembly\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class\Class.cs" />
+    <Compile Include="Class\Database.cs" />
+    <Compile Include="Class\Device.cs" />
+    <Compile Include="Class\Email.cs" />
+    <Compile Include="Class\Station.cs" />
+    <Compile Include="Class\XmlUtil.cs" />
+    <Compile Include="Connected Services\MesSvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="DataSearch\DlgDatetimePickers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataSearch\DlgDatetimePickers.Designer.cs">
+      <DependentUpon>DlgDatetimePickers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSearch\UcDataSearch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataSearch\UcDataSearch.Designer.cs">
+      <DependentUpon>UcDataSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DlgEmployeeID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DlgEmployeeID.Designer.cs">
+      <DependentUpon>DlgEmployeeID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DlgRootMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DlgRootMode.Designer.cs">
+      <DependentUpon>DlgRootMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DlgSystemSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DlgSystemSetting.Designer.cs">
+      <DependentUpon>DlgSystemSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DlgVersionDescription.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DlgVersionDescription.Designer.cs">
+      <DependentUpon>DlgVersionDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadingGIF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadingGIF.Designer.cs">
+      <DependentUpon>LoadingGIF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\DlgStationID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Management\DlgStationID.Designer.cs">
+      <DependentUpon>DlgStationID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Management\DlgAddDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Management\DlgAddDevice.Designer.cs">
+      <DependentUpon>DlgAddDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\DlgAddStation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Management\DlgAddStation.Designer.cs">
+      <DependentUpon>DlgAddStation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\DlgAddStationDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Management\DlgAddStationDevice.Designer.cs">
+      <DependentUpon>DlgAddStationDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\UcManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\UcManagement.Designer.cs">
+      <DependentUpon>UcManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SI\DlgArrayEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SI\DlgArrayEditor.Designer.cs">
+      <DependentUpon>DlgArrayEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SI\DlgCondiEnumEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SI\DlgCondiEnumEditor.Designer.cs">
+      <DependentUpon>DlgCondiEnumEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SI\DlgDevcieList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SI\DlgDevcieList.Designer.cs">
+      <DependentUpon>DlgDevcieList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SI\DlgImpotFunction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SI\DlgImpotFunction.Designer.cs">
+      <DependentUpon>DlgImpotFunction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SI\DlgSetArrayLength.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SI\DlgSetArrayLength.Designer.cs">
+      <DependentUpon>DlgSetArrayLength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SI\DlgVariables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SI\DlgVariables.Designer.cs">
+      <DependentUpon>DlgVariables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SI\DlgNewItemEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SI\DlgNewItemEditor.Designer.cs">
+      <DependentUpon>DlgNewItemEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SI\SI_TestFunction.cs" />
+    <Compile Include="SI\UcSIItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SI\UcSIItem.Designer.cs">
+      <DependentUpon>UcSIItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SI\Variables.cs" />
+    <Compile Include="SP\DlgItemList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SP\DlgItemList.Designer.cs">
+      <DependentUpon>DlgItemList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SP\UcSIProgram.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SP\UcSIProgram.Designer.cs">
+      <DependentUpon>UcSIProgram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Style\ButtonStyle.cs" />
+    <Compile Include="TestCommands\01%29System, Flow Control\DelayExS.cs" />
+    <Compile Include="TestCommands\01%29System, Flow Control\DelayS.cs" />
+    <Compile Include="TestCommands\01%29System, Flow Control\GetPassFail.cs" />
+    <Compile Include="TestCommands\01%29System, Flow Control\Goto.cs" />
+    <Compile Include="TestCommands\01%29System, Flow Control\If_Then.cs" />
+    <Compile Include="TestCommands\01%29System, Flow Control\InputTextbox.cs" />
+    <Compile Include="TestCommands\01%29System, Flow Control\PauseMsg.cs" />
+    <Compile Include="TestCommands\02%29Arithmetic\ABS.cs" />
+    <Compile Include="TestCommands\02%29Arithmetic\ADD.cs" />
+    <Compile Include="TestCommands\02%29Arithmetic\DEC.cs" />
+    <Compile Include="TestCommands\02%29Arithmetic\DIV.cs" />
+    <Compile Include="TestCommands\02%29Arithmetic\INC.cs" />
+    <Compile Include="TestCommands\02%29Arithmetic\MUL.cs" />
+    <Compile Include="TestCommands\02%29Arithmetic\SET.cs" />
+    <Compile Include="TestCommands\02%29Arithmetic\SUB.cs" />
+    <Compile Include="TestCommands\03%29String\StrCat.cs" />
+    <Compile Include="TestCommands\03%29String\SETS.cs" />
+    <Compile Include="TestCommands\04%29Miscellaneous\GetArrayFloatElement.cs" />
+    <Compile Include="TestCommands\04%29Miscellaneous\GetArrayIntegerElement.cs" />
+    <Compile Include="TestCommands\04%29Miscellaneous\SetArrayIntegerValue.cs" />
+    <Compile Include="TestCommands\04%29Miscellaneous\SetArrayFloatValue.cs" />
+    <Compile Include="TestCommands\07%29Command Read, Write\ReadDev_Command.cs" />
+    <Compile Include="TestCommands\07%29Command Read, Write\WriteDev_BinaryCommand.cs" />
+    <Compile Include="TestCommands\07%29Command Read, Write\WriteDev_Command.cs" />
+    <Compile Include="TestCommands\11%29AC Source\ReadACDev_Response.cs" />
+    <Compile Include="TestCommands\11%29AC Source\ReadAC_Current.cs" />
+    <Compile Include="TestCommands\11%29AC Source\ReadAC_Voltage.cs" />
+    <Compile Include="TestCommands\11%29AC Source\SetAC_Frequency.cs" />
+    <Compile Include="TestCommands\11%29AC Source\SetAC_Instrument.cs" />
+    <Compile Include="TestCommands\11%29AC Source\SetAC_OutputMode.cs" />
+    <Compile Include="TestCommands\11%29AC Source\SetAC_OutputState.cs" />
+    <Compile Include="TestCommands\11%29AC Source\SetAC_Vout.cs" />
+    <Compile Include="TestCommands\11%29AC Source\SetAC_VoltRange.cs" />
+    <Compile Include="TestCommands\11%29AC Source\WriteACDev_Command.cs" />
+    <Compile Include="TestCommands\12%29DC Source\SetDC_Ilimit.cs" />
+    <Compile Include="TestCommands\12%29DC Source\SetDC_OutputMode.cs" />
+    <Compile Include="TestCommands\13%29DMM\Set3458A_FuncRange.cs" />
+    <Compile Include="TestCommands\13%29DMM\SetDMM_NPLC.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\ReadPM_Current.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\ReadPM_Frequency.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\ReadPM_Power.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\ReadPM_Voltage.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\SetPM_Default.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\SetPM_InputCT.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\SetPM_InputWiring.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\SetPM_MeasAverage.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\SetPM_MeasMode.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\SetPM_ShowChannel.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\SetPM_ShowItem.cs" />
+    <Compile Include="TestCommands\14%29PowerMeter\WritePMDev_Command.cs" />
+    <Compile Include="TestCommands\16%29Fluke\SetFluke_OutputState.cs" />
+    <Compile Include="TestCommands\16%29Fluke\SetFluke_OutputState2.cs" />
+    <Compile Include="TestCommands\16%29Fluke\SetFluke_OutputValue.cs" />
+    <Compile Include="TestCommands\16%29Fluke\WriteFluke_Command.cs" />
+    <Compile Include="TestCommands\CmdsParameterEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestCommands\CmdsParameterEditor.Designer.cs">
+      <DependentUpon>CmdsParameterEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestCommands\12%29DC Source\ReadDCDev_Response.cs" />
+    <Compile Include="TestCommands\12%29DC Source\ReadDC_Iout.cs" />
+    <Compile Include="TestCommands\12%29DC Source\ReadDC_Vout.cs" />
+    <Compile Include="TestCommands\12%29DC Source\WriteDCDev_Command.cs" />
+    <Compile Include="TestCommands\12%29DC Source\SetDC_OutputState.cs" />
+    <Compile Include="TestCommands\12%29DC Source\SetDC_Vout.cs" />
+    <Compile Include="TestCommands\13%29DMM\ReadDMMDev_Response.cs" />
+    <Compile Include="TestCommands\13%29DMM\ReadDMM_Measure.cs" />
+    <Compile Include="TestCommands\13%29DMM\SetDMM_FuncRange.cs" />
+    <Compile Include="TestCommands\13%29DMM\WriteDMMDev_Command.cs" />
+    <Compile Include="TestCommands\DlgDelayExS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestCommands\DlgDelayExS.Designer.cs">
+      <DependentUpon>DlgDelayExS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestCommands\DlgInputTextbox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestCommands\DlgInputTextbox.Designer.cs">
+      <DependentUpon>DlgInputTextbox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestCommands\TestCommand.cs" />
+    <EmbeddedResource Include="DataSearch\DlgDatetimePickers.resx">
+      <DependentUpon>DlgDatetimePickers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataSearch\UcDataSearch.resx">
+      <DependentUpon>UcDataSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DlgRootMode.resx">
+      <DependentUpon>DlgRootMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DlgSystemSetting.resx">
+      <DependentUpon>DlgSystemSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadingGIF.resx">
+      <DependentUpon>LoadingGIF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\DlgStationID.resx">
+      <DependentUpon>DlgStationID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Management\DlgAddDevice.resx">
+      <DependentUpon>DlgAddDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\DlgAddStation.resx">
+      <DependentUpon>DlgAddStation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\DlgAddStationDevice.resx">
+      <DependentUpon>DlgAddStationDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\UcManagement.resx">
+      <DependentUpon>UcManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SI\DlgArrayEditor.resx">
+      <DependentUpon>DlgArrayEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SI\DlgCondiEnumEditor.resx">
+      <DependentUpon>DlgCondiEnumEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SI\DlgDevcieList.resx">
+      <DependentUpon>DlgDevcieList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SI\DlgImpotFunction.resx">
+      <DependentUpon>DlgImpotFunction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SI\DlgSetArrayLength.resx">
+      <DependentUpon>DlgSetArrayLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SI\DlgVariables.resx">
+      <DependentUpon>DlgVariables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SI\DlgNewItemEditor.resx">
+      <DependentUpon>DlgNewItemEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SI\UcSIItem.resx">
+      <DependentUpon>UcSIItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SP\DlgItemList.resx">
+      <DependentUpon>DlgItemList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SP\UcSIProgram.resx">
+      <DependentUpon>UcSIProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestCommands\CmdsParameterEditor.resx">
+      <DependentUpon>CmdsParameterEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestCommands\DlgDelayExS.resx">
+      <DependentUpon>DlgDelayExS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestCommands\DlgInputTextbox.resx">
+      <DependentUpon>DlgInputTextbox.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Connected Services\MesSvc\Self_Inspection_III.MesSvc.ExecuteProcResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MesSvc\Self_Inspection_III.MesSvc.ExecuteSQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MesSvc\Service1.wsdl" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestCommands\15%29DSO\" />
+    <Folder Include="TestCommands\17%29Load\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LOADING.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\favicon-20181222010917545.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\MesSvc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MesSvc\Service1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MesSvc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MesSvc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MesSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon-20181222010917545.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

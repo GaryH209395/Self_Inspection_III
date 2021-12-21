@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Station xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Active>false</Active>
+  <Name>17040-1 Station</Name>
+  <CL>-</CL>
+  <TL>-</TL>
+  <PE>-</PE>
+  <TE>-</TE>
+  <Items>
+    <Item>
+      <Active>false</Active>
+      <Station />
+      <Name>34401A-1</Name>
+      <Source />
+      <Meter />
+      <TestItems />
+    </Item>
+    <Item>
+      <Active>false</Active>
+      <Station />
+      <Name>34401A_Season-1</Name>
+      <Source />
+      <Meter />
+      <TestItems />
+    </Item>
+    <Item>
+      <Active>true</Active>
+      <Station />
+      <Name>66204-1</Name>
+      <Source />
+      <Meter />
+      <TestItems />
+    </Item>
+  </Items>
+  <Devices>
+    <Device>
+      <ShowName>DVM-1</ShowName>
+      <ModelName>34401A</ModelName>
+      <Station />
+      <No>01</No>
+      <Interface>GPIB</Interface>
+      <Address>0:22:0</Address>
+      <Type>DVM</Type>
+      <Active>false</Active>
+    </Device>
+    <Device>
+      <ShowName>66204</ShowName>
+      <ModelName>66204</ModelName>
+      <Station />
+      <No>01</No>
+      <Interface>GPIB</Interface>
+      <Address>0:12:0</Address>
+      <Type>PowerMeter</Type>
+      <Active>false</Active>
+    </Device>
+    <Device>
+      <ShowName>62150H-40</ShowName>
+      <ModelName>62150H-40</ModelName>
+      <Station />
+      <No>01</No>
+      <Interface>GPIB</Interface>
+      <Address>0:1:0</Address>
+      <Type>DC Source</Type>
+      <Active>false</Active>
+    </Device>
+    <Device>
+      <ShowName>Fluke</ShowName>
+      <ModelName>Fluke</ModelName>
+      <Station />
+      <No>01</No>
+      <Interface>GPIB</Interface>
+      <Address>0:4:0</Address>
+      <Type>Fluke</Type>
+      <Active>false</Active>
+    </Device>
+  </Devices>
+</Station>

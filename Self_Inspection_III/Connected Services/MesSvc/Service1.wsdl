@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ExecuteSQL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sSQL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Params" type="tns:ArrayOfArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArrayOfAnyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfAnyType" nillable="true" type="tns:ArrayOfAnyType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAnyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ExecuteSQLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteSQLResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Params" type="tns:ArrayOfArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteProcResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CaseNumberUpload">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sApprove" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CaseNumberUploadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CaseNumberUploadResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CaseNumberUploadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="CaseNumberUploadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ApproveUpload">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sApprove" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sApply" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApproveUploadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApproveUploadResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SN_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sSN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SN_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SN_InfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SN_KP_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sSN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SN_KP_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SN_KP_InfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Data_String">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Data_StringResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Data_StringResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Data">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_DataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_DataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_MySQL_Data">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_MySQL_DataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_MySQL_DataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Insert_MySQL_Data">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Insert_MySQL_DataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Insert_MySQL_DataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Convert_To_Big5">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SourceString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Convert_To_Big5Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Convert_To_Big5Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Convert_To_GB2312">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SourceString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Convert_To_GB2312Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Convert_To_GB2312Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_Data">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sProc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sData" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSplit" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_DataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Check_DataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_Data_DataSet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sProc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sData" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSplit" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_Data_DataSetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Check_Data_DataSetResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_File">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_FileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Check_FileResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunExe">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunExeResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ExecuteSQLSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteSQL" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteSQLSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteSQLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteProcSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteProc" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteProcSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="CaseNumberUploadSoapIn">
+    <wsdl:part name="parameters" element="tns:CaseNumberUpload" />
+  </wsdl:message>
+  <wsdl:message name="CaseNumberUploadSoapOut">
+    <wsdl:part name="parameters" element="tns:CaseNumberUploadResponse" />
+  </wsdl:message>
+  <wsdl:message name="CaseNumberUploadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:CaseNumberUploadAll" />
+  </wsdl:message>
+  <wsdl:message name="CaseNumberUploadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:CaseNumberUploadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApproveUploadSoapIn">
+    <wsdl:part name="parameters" element="tns:ApproveUpload" />
+  </wsdl:message>
+  <wsdl:message name="ApproveUploadSoapOut">
+    <wsdl:part name="parameters" element="tns:ApproveUploadResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SN_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SN_Info" />
+  </wsdl:message>
+  <wsdl:message name="Get_SN_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SN_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SN_KP_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SN_KP_Info" />
+  </wsdl:message>
+  <wsdl:message name="Get_SN_KP_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SN_KP_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Data_StringSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Data_String" />
+  </wsdl:message>
+  <wsdl:message name="Get_Data_StringSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Data_StringResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_DataSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Data" />
+  </wsdl:message>
+  <wsdl:message name="Get_DataSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_DataResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_MySQL_DataSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_MySQL_Data" />
+  </wsdl:message>
+  <wsdl:message name="Get_MySQL_DataSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_MySQL_DataResponse" />
+  </wsdl:message>
+  <wsdl:message name="Insert_MySQL_DataSoapIn">
+    <wsdl:part name="parameters" element="tns:Insert_MySQL_Data" />
+  </wsdl:message>
+  <wsdl:message name="Insert_MySQL_DataSoapOut">
+    <wsdl:part name="parameters" element="tns:Insert_MySQL_DataResponse" />
+  </wsdl:message>
+  <wsdl:message name="Convert_To_Big5SoapIn">
+    <wsdl:part name="parameters" element="tns:Convert_To_Big5" />
+  </wsdl:message>
+  <wsdl:message name="Convert_To_Big5SoapOut">
+    <wsdl:part name="parameters" element="tns:Convert_To_Big5Response" />
+  </wsdl:message>
+  <wsdl:message name="Convert_To_GB2312SoapIn">
+    <wsdl:part name="parameters" element="tns:Convert_To_GB2312" />
+  </wsdl:message>
+  <wsdl:message name="Convert_To_GB2312SoapOut">
+    <wsdl:part name="parameters" element="tns:Convert_To_GB2312Response" />
+  </wsdl:message>
+  <wsdl:message name="Check_DataSoapIn">
+    <wsdl:part name="parameters" element="tns:Check_Data" />
+  </wsdl:message>
+  <wsdl:message name="Check_DataSoapOut">
+    <wsdl:part name="parameters" element="tns:Check_DataResponse" />
+  </wsdl:message>
+  <wsdl:message name="Check_Data_DataSetSoapIn">
+    <wsdl:part name="parameters" element="tns:Check_Data_DataSet" />
+  </wsdl:message>
+  <wsdl:message name="Check_Data_DataSetSoapOut">
+    <wsdl:part name="parameters" element="tns:Check_Data_DataSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="Check_FileSoapIn">
+    <wsdl:part name="parameters" element="tns:Check_File" />
+  </wsdl:message>
+  <wsdl:message name="Check_FileSoapOut">
+    <wsdl:part name="parameters" element="tns:Check_FileResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunExeSoapIn">
+    <wsdl:part name="parameters" element="tns:RunExe" />
+  </wsdl:message>
+  <wsdl:message name="RunExeSoapOut">
+    <wsdl:part name="parameters" element="tns:RunExeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="ExecuteSQL">
+      <wsdl:input message="tns:ExecuteSQLSoapIn" />
+      <wsdl:output message="tns:ExecuteSQLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteProc">
+      <wsdl:input message="tns:ExecuteProcSoapIn" />
+      <wsdl:output message="tns:ExecuteProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CaseNumberUpload">
+      <wsdl:input message="tns:CaseNumberUploadSoapIn" />
+      <wsdl:output message="tns:CaseNumberUploadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CaseNumberUploadAll">
+      <wsdl:input message="tns:CaseNumberUploadAllSoapIn" />
+      <wsdl:output message="tns:CaseNumberUploadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ApproveUpload">
+      <wsdl:input message="tns:ApproveUploadSoapIn" />
+      <wsdl:output message="tns:ApproveUploadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SN_Info">
+      <wsdl:input message="tns:Get_SN_InfoSoapIn" />
+      <wsdl:output message="tns:Get_SN_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SN_KP_Info">
+      <wsdl:input message="tns:Get_SN_KP_InfoSoapIn" />
+      <wsdl:output message="tns:Get_SN_KP_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Data_String">
+      <wsdl:input message="tns:Get_Data_StringSoapIn" />
+      <wsdl:output message="tns:Get_Data_StringSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Data">
+      <wsdl:input message="tns:Get_DataSoapIn" />
+      <wsdl:output message="tns:Get_DataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_MySQL_Data">
+      <wsdl:input message="tns:Get_MySQL_DataSoapIn" />
+      <wsdl:output message="tns:Get_MySQL_DataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Insert_MySQL_Data">
+      <wsdl:input message="tns:Insert_MySQL_DataSoapIn" />
+      <wsdl:output message="tns:Insert_MySQL_DataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Convert_To_Big5">
+      <wsdl:input message="tns:Convert_To_Big5SoapIn" />
+      <wsdl:output message="tns:Convert_To_Big5SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Convert_To_GB2312">
+      <wsdl:input message="tns:Convert_To_GB2312SoapIn" />
+      <wsdl:output message="tns:Convert_To_GB2312SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Check_Data">
+      <wsdl:input message="tns:Check_DataSoapIn" />
+      <wsdl:output message="tns:Check_DataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Check_Data_DataSet">
+      <wsdl:input message="tns:Check_Data_DataSetSoapIn" />
+      <wsdl:output message="tns:Check_Data_DataSetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Check_File">
+      <wsdl:input message="tns:Check_FileSoapIn" />
+      <wsdl:output message="tns:Check_FileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunExe">
+      <wsdl:input message="tns:RunExeSoapIn" />
+      <wsdl:output message="tns:RunExeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ExecuteSQL">
+      <soap:operation soapAction="http://tempuri.org/ExecuteSQL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteProc">
+      <soap:operation soapAction="http://tempuri.org/ExecuteProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CaseNumberUpload">
+      <soap:operation soapAction="http://tempuri.org/CaseNumberUpload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CaseNumberUploadAll">
+      <soap:operation soapAction="http://tempuri.org/CaseNumberUploadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApproveUpload">
+      <soap:operation soapAction="http://tempuri.org/ApproveUpload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SN_Info">
+      <soap:operation soapAction="http://tempuri.org/Get_SN_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SN_KP_Info">
+      <soap:operation soapAction="http://tempuri.org/Get_SN_KP_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Data_String">
+      <soap:operation soapAction="http://tempuri.org/Get_Data_String" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Data">
+      <soap:operation soapAction="http://tempuri.org/Get_Data" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_MySQL_Data">
+      <soap:operation soapAction="http://tempuri.org/Get_MySQL_Data" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insert_MySQL_Data">
+      <soap:operation soapAction="http://tempuri.org/Insert_MySQL_Data" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Convert_To_Big5">
+      <soap:operation soapAction="http://tempuri.org/Convert_To_Big5" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Convert_To_GB2312">
+      <soap:operation soapAction="http://tempuri.org/Convert_To_GB2312" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_Data">
+      <soap:operation soapAction="http://tempuri.org/Check_Data" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_Data_DataSet">
+      <soap:operation soapAction="http://tempuri.org/Check_Data_DataSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_File">
+      <soap:operation soapAction="http://tempuri.org/Check_File" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunExe">
+      <soap:operation soapAction="http://tempuri.org/RunExe" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ExecuteSQL">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteSQL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteProc">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CaseNumberUpload">
+      <soap12:operation soapAction="http://tempuri.org/CaseNumberUpload" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CaseNumberUploadAll">
+      <soap12:operation soapAction="http://tempuri.org/CaseNumberUploadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApproveUpload">
+      <soap12:operation soapAction="http://tempuri.org/ApproveUpload" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SN_Info">
+      <soap12:operation soapAction="http://tempuri.org/Get_SN_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SN_KP_Info">
+      <soap12:operation soapAction="http://tempuri.org/Get_SN_KP_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Data_String">
+      <soap12:operation soapAction="http://tempuri.org/Get_Data_String" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Data">
+      <soap12:operation soapAction="http://tempuri.org/Get_Data" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_MySQL_Data">
+      <soap12:operation soapAction="http://tempuri.org/Get_MySQL_Data" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insert_MySQL_Data">
+      <soap12:operation soapAction="http://tempuri.org/Insert_MySQL_Data" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Convert_To_Big5">
+      <soap12:operation soapAction="http://tempuri.org/Convert_To_Big5" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Convert_To_GB2312">
+      <soap12:operation soapAction="http://tempuri.org/Convert_To_GB2312" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_Data">
+      <soap12:operation soapAction="http://tempuri.org/Check_Data" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_Data_DataSet">
+      <soap12:operation soapAction="http://tempuri.org/Check_Data_DataSet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_File">
+      <soap12:operation soapAction="http://tempuri.org/Check_File" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunExe">
+      <soap12:operation soapAction="http://tempuri.org/RunExe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="http://mesap4/WebService/Service1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="http://mesap4/WebService/Service1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

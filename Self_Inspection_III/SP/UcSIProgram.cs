@@ -387,7 +387,16 @@ namespace Self_Inspection_III.SP
                             }
                             #endregion
 
-                            if (TestCommand.DoFunction(func, niDriver, ref tempVars))
+                            if (DeviceDB.GetType(func.Device) == DeviceTypes.IO_Card)
+                            {
+                                if (TestCommand.DoIOFunction(func, IOCardDB.Get_IOCard(func.Device), ref tempVars))
+                                {
+                                    PF = ColorText.Error;
+                                    StopMsg = $"Function Error:\n {func.TestCommand}({func.Parameter}) at line {funcIdx}";
+                                    return false;
+                                }
+                            }
+                            else if (TestCommand.DoFunction(func, niDriver, ref tempVars))
                             {
                                 PF = ColorText.Error;
                                 StopMsg = $"Function Error:\n {func.TestCommand}({func.Parameter}) at line {funcIdx}";

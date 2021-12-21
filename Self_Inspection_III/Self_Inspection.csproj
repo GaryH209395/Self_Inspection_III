@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Class.cs" />
+    <Compile Include="Class\DASK.cs" />
     <Compile Include="Class\Database.cs" />
     <Compile Include="Class\Device.cs" />
     <Compile Include="Class\Email.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="TestCommands\16%29Fluke\SetFluke_OutputState2.cs" />
     <Compile Include="TestCommands\16%29Fluke\SetFluke_OutputValue.cs" />
     <Compile Include="TestCommands\16%29Fluke\WriteFluke_Command.cs" />
+    <Compile Include="TestCommands\18%29IO Card\SetIO_OutputState.cs" />
     <Compile Include="TestCommands\CmdsParameterEditor.cs">
       <SubType>Form</SubType>
     </Compile>

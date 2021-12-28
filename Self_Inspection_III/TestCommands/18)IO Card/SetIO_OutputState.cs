@@ -24,29 +24,32 @@ namespace Self_Inspection_III.TestCommands.IO_Card
             };
         }
         
-        protected override bool Function(string ParaString, string ModelName, ushort Card_Type, ref ItemVars Vars)
+        protected override bool Function(string ParaString, string ModelName, ushort Card_Type,out short IO_Dev, ref ItemVars Vars)
         {
             string[] para = ParaString.Split(',');
-            short IO_Status;
-
-            //***  Register the IO Card  ***//                      
-            m_dev = DASK.Register_Card(Card_Type, 0);
-            if (m_dev < 0){                
-                Console.WriteLine("Register_Card error!");
-            }
+            short IO_Status;            
 
             //***  Setting CardNumber/Port/Switch  ***//
             ushort CardNumber = Convert.ToUInt16(Vars.GetValue(para[0]));
-            byte[] Port = Encoding.UTF8.GetBytes(Vars.GetValue(para[1]));
-            uint Switch = Convert.ToUInt16(Vars.GetValue(para[2]));
+            ushort RelayChannel = Convert.ToUInt16(Vars.GetValue(para[1]));
+            //byte[] Port = Encoding.UTF8.GetBytes(Vars.GetValue(para[1]));
+            ushort RelaySwitch = Convert.ToUInt16(Vars.GetValue(para[2]));
+
+            //***  Register the IO Card  ***//                      
+            m_dev = DASK.Register_Card(Card_Type, CardNumber);
+            IO_Dev = m_dev;
+            if (m_dev < 0){
+                Console.WriteLine("Register_Card error!");
+            }
 
             //*****************************// 
             //*        DO_WritePort       *//
             //* Control the IO Card in PC *//
             //*****************************// 
-            IO_Status = DASK.DO_WritePort(CardNumber, Port[0], Switch);
+            //IO_Status = DASK.DO_WritePort(CardNumber, Port[0], Switch);
+            IO_Status = DASK.DO_WriteLine(CardNumber, 0, RelayChannel, RelaySwitch);        //PCI-7230/7234 ->  The Port need to set Zero.
             if (IO_Status < 0){
-                Console.WriteLine("DO_WritePort error!");
+                Console.WriteLine("DO_WriteLine error!");
             }
 
             //*******************************//

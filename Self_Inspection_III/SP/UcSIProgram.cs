@@ -31,6 +31,7 @@ namespace Self_Inspection_III.SP
         //測試使用參數
         private Dictionary<string, CviVisaCtrl> _NIDriver = new Dictionary<string, CviVisaCtrl>() { { "*", null } };
         private Dictionary<string, short> _CardNumber = new Dictionary<string, short>() { { "*", 0 } };
+        private List<short> IO_Dev = new List<short>();
 
         //Database
         private ProgramDB ProgramDB = new ProgramDB();
@@ -330,6 +331,7 @@ namespace Self_Inspection_III.SP
                                 if (DeviceDB.GetType(dgvSPDeviceList[(int)ColSPDevice.ModelName, i].Value) == DeviceTypes.IO_Card)
                                 {
                                     if (!_CardNumber.ContainsKey(key)) _CardNumber.Add(key, Convert.ToInt16(dgvSPDeviceList[(int)ColSPDevice.Address, i].Value));
+                                    //if (RootMode) MessageBox.Show($"_CardNumber[{key}]=" + _CardNumber[key]);
                                     connectResult = ColorText.Pass;
                                 }
                                 else
@@ -373,6 +375,7 @@ namespace Self_Inspection_III.SP
 
                             string modelName = func.Device.Split('-')[0];
                             bool isIOCard = DeviceDB.GetType(modelName) == DeviceTypes.IO_Card;
+                            //if (RootMode) MessageBox.Show($"DeviceDB.GetType({modelName}).isIOCard={isIOCard}");
 
                             #region Find Device
                             CviVisaCtrl niDriver = _NIDriver["*"];
@@ -403,13 +406,14 @@ namespace Self_Inspection_III.SP
                                 }
                             }
                             #endregion
-                         
+
                             if (isIOCard)
-                            {                              
-                                if (TestCommand.DoIOFunction(func, IOCardDB.Get_IOCard(modelName),out short io_dev, ref tempVars))
+                            {
+                                //if (RootMode) MessageBox.Show($"TestCommand.DoIOFunction({func.Parameter}, {_CardNumber[func.Device]}, {IOCardDB.Get_IOCard(modelName)})");
+                                if (TestCommand.DoIOFunction(func, (ushort)_CardNumber[func.Device], IOCardDB.Get_IOCard(modelName), out short io_dev, ref tempVars))
                                 {
-                                    _CardNumber[func.Device] = io_dev;
                                     PF = ColorText.Error;
+                                    if (!IO_Dev.Exists(x => x == io_dev)) IO_Dev.Add(io_dev);
                                     StopMsg = $"Function Error:\n {func.TestCommand}({func.Parameter}) at line {funcIdx}";
                                     return false;
                                 }
@@ -521,6 +525,13 @@ namespace Self_Inspection_III.SP
                 }
                 finally
                 {
+                    foreach (short io_dev in IO_Dev)
+                    {
+                        if (io_dev >= 0)
+                        {
+                            DASK.Release_Card((ushort)io_dev);
+                        }
+                    }
                     for (int i = 0; i < dgvSPDeviceList.RowCount; i++)
                     {
                         try { if (dgvSPDeviceList[(int)ColSPDevice.Connect, i].Value.ToString() != ColorText.Pass.Text) continue; } catch { continue; }
@@ -532,13 +543,8 @@ namespace Self_Inspection_III.SP
                             {
                                 if (DeviceDB.GetType(modelName) == DeviceTypes.IO_Card)
                                 {
-                                    short ret;
-                                    if (_CardNumber[key] >= 0)
-                                    {
-                                        ret = DASK.Release_Card((ushort)_CardNumber[key]);
-                                        dgvSPDeviceList[(int)ColSPDevice.Connect, i].Value = ColorText.Off.Text;
-                                        dgvSPDeviceList[(int)ColSPDevice.Connect, i].Style.ForeColor = ColorText.Off.Color;
-                                    }
+                                    dgvSPDeviceList[(int)ColSPDevice.Connect, i].Value = ColorText.Off.Text;
+                                    dgvSPDeviceList[(int)ColSPDevice.Connect, i].Style.ForeColor = ColorText.Off.Color;
                                 }
                                 else
                                 if (TestCommand.SourceOff(modelName, _NIDriver[key])) throw new Exception();
@@ -809,8 +815,8 @@ namespace Self_Inspection_III.SP
         }
         private void RowsCopy(bool isCut)
         {
-            if ( CopiedDgvRows.Count > 0) CopiedDgvRows.Clear();
-            if ( copiedItems.Count > 0) copiedItems.Clear();
+            if (CopiedDgvRows.Count > 0) CopiedDgvRows.Clear();
+            if (copiedItems.Count > 0) copiedItems.Clear();
 
             foreach (DataGridViewRow row in dgv_Program.SelectedRows)
             {

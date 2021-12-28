@@ -75,7 +75,7 @@ namespace Self_Inspection_III
 
             if (ServerUpdateAppDir.Exists)
             {
-                //CheckVersion_Temp(ServerUpdateAppDir, ServerUpdateFileDir);
+                CheckVersion_Temp(ServerUpdateAppDir, ServerUpdateFileDir);
 
                 AddUserControls();
                 tsmiModeSwtiching.PerformClick();

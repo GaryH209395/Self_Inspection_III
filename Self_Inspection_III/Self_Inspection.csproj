@@ -40,10 +40,10 @@
       <HintPath>..\..\..\MFG System\MFGSystem\Assembly\ChromaSajetConnect.dll</HintPath>
     </Reference>
     <Reference Include="CviVisaDriver">
-      <HintPath>..\..\Self_Inspection_II\CviVisaDriver\bin\x86\Debug\CviVisaDriver.dll</HintPath>
+      <HintPath>..\..\..\..\source\repos\Self_Inspection_III\Self_Inspection_III\bin\Debug\CviVisaDriver.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\MFG System\MFGSystem\Assembly\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\source\repos\Self_Inspection_III\Self_Inspection_III\bin\Debug\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -30,6 +30,7 @@ namespace Self_Inspection_III.SP
 
         //測試使用參數
         private Dictionary<string, CviVisaCtrl> _NIDriver = new Dictionary<string, CviVisaCtrl>() { { "*", null } };
+        private Dictionary<string, short> _CardNumber = new Dictionary<string, short>() { { "*", 0 } };
 
         //Database
         private ProgramDB ProgramDB = new ProgramDB();
@@ -195,6 +196,9 @@ namespace Self_Inspection_III.SP
                     WriteLine("::Run Items::");
                     if (_NIDriver.Count > 0) _NIDriver.Clear();
                     if (_NIDriver.Count == 0) _NIDriver.Add("*", null);
+                    if (_CardNumber.Count > 0) _CardNumber.Clear();
+                    if (_CardNumber.Count == 0) _CardNumber.Add("*", 0);
+
 
                     ColorText PF = ColorText.Pass; bool uploadSucceed = true;
                     for (int itemIdx = 0; itemIdx < dgv_Program.RowCount; itemIdx++)
@@ -325,6 +329,7 @@ namespace Self_Inspection_III.SP
                                 ColorText connectResult;
                                 if (DeviceDB.GetType(dgvSPDeviceList[(int)ColSPDevice.ModelName, i].Value) == DeviceTypes.IO_Card)
                                 {
+                                    if (!_CardNumber.ContainsKey(key)) _CardNumber.Add(key, Convert.ToInt16(dgvSPDeviceList[(int)ColSPDevice.Address, i].Value));
                                     connectResult = ColorText.Pass;
                                 }
                                 else
@@ -400,9 +405,10 @@ namespace Self_Inspection_III.SP
                             #endregion
                          
                             if (isIOCard)
-                            {
-                                if (TestCommand.DoIOFunction(func, IOCardDB.Get_IOCard(modelName), ref tempVars))
+                            {                              
+                                if (TestCommand.DoIOFunction(func, IOCardDB.Get_IOCard(modelName),out short io_dev, ref tempVars))
                                 {
+                                    _CardNumber[func.Device] = io_dev;
                                     PF = ColorText.Error;
                                     StopMsg = $"Function Error:\n {func.TestCommand}({func.Parameter}) at line {funcIdx}";
                                     return false;
@@ -524,6 +530,17 @@ namespace Self_Inspection_III.SP
                             string key = $"{dgvSPDeviceList[(int)ColSPDevice.ModelName, i].Value}-{dgvSPDeviceList[(int)ColSPDevice.No, i].Value}";
                             try
                             {
+                                if (DeviceDB.GetType(modelName) == DeviceTypes.IO_Card)
+                                {
+                                    short ret;
+                                    if (_CardNumber[key] >= 0)
+                                    {
+                                        ret = DASK.Release_Card((ushort)_CardNumber[key]);
+                                        dgvSPDeviceList[(int)ColSPDevice.Connect, i].Value = ColorText.Off.Text;
+                                        dgvSPDeviceList[(int)ColSPDevice.Connect, i].Style.ForeColor = ColorText.Off.Color;
+                                    }
+                                }
+                                else
                                 if (TestCommand.SourceOff(modelName, _NIDriver[key])) throw new Exception();
                                 else
                                 {

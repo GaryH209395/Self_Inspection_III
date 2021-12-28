@@ -34,6 +34,14 @@ namespace Self_Inspection_III.MesSvc {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ExecuteProc", ReplyAction="*")]
         System.Threading.Tasks.Task<Self_Inspection_III.MesSvc.ExecuteProcResponse> ExecuteProcAsync(Self_Inspection_III.MesSvc.ExecuteProcRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSN", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[][]))]
+        void UpdateSN(string sSN, string sModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSN", ReplyAction="*")]
+        System.Threading.Tasks.Task UpdateSNAsync(string sSN, string sModel);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CaseNumberUpload", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[][]))]
@@ -105,22 +113,6 @@ namespace Self_Inspection_III.MesSvc {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Insert_MySQL_Data", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> Insert_MySQL_DataAsync(string sType, string sValue);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Convert_To_Big5", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[][]))]
-        string Convert_To_Big5(string SourceString);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Convert_To_Big5", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> Convert_To_Big5Async(string SourceString);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Convert_To_GB2312", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[][]))]
-        string Convert_To_GB2312(string SourceString);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Convert_To_GB2312", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> Convert_To_GB2312Async(string SourceString);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Check_Data", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -312,6 +304,14 @@ namespace Self_Inspection_III.MesSvc {
             return ((Self_Inspection_III.MesSvc.Service1Soap)(this)).ExecuteProcAsync(inValue);
         }
         
+        public void UpdateSN(string sSN, string sModel) {
+            base.Channel.UpdateSN(sSN, sModel);
+        }
+        
+        public System.Threading.Tasks.Task UpdateSNAsync(string sSN, string sModel) {
+            return base.Channel.UpdateSNAsync(sSN, sModel);
+        }
+        
         public string CaseNumberUpload(string sApprove) {
             return base.Channel.CaseNumberUpload(sApprove);
         }
@@ -382,22 +382,6 @@ namespace Self_Inspection_III.MesSvc {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> Insert_MySQL_DataAsync(string sType, string sValue) {
             return base.Channel.Insert_MySQL_DataAsync(sType, sValue);
-        }
-        
-        public string Convert_To_Big5(string SourceString) {
-            return base.Channel.Convert_To_Big5(SourceString);
-        }
-        
-        public System.Threading.Tasks.Task<string> Convert_To_Big5Async(string SourceString) {
-            return base.Channel.Convert_To_Big5Async(SourceString);
-        }
-        
-        public string Convert_To_GB2312(string SourceString) {
-            return base.Channel.Convert_To_GB2312(SourceString);
-        }
-        
-        public System.Threading.Tasks.Task<string> Convert_To_GB2312Async(string SourceString) {
-            return base.Channel.Convert_To_GB2312Async(SourceString);
         }
         
         public string Check_Data(string sProc, string sData, string sSplit) {

@@ -35,7 +35,6 @@ namespace Self_Inspection_III.TestCommands.IO_Card
             //byte[] Port = Encoding.UTF8.GetBytes(Vars.GetValue(para[1]));
             ushort RelaySwitch = Convert.ToUInt16(Vars.GetValue(para[2]));
 
-<<<<<<< HEAD
             //***  Setting CardNumber/Port/Switch  ***//
             ushort CardNumber = Convert.ToUInt16(Vars.GetValue(para[0]));
             byte[] Port = Encoding.UTF8.GetBytes(Vars.GetValue(para[1]));
@@ -45,12 +44,10 @@ namespace Self_Inspection_III.TestCommands.IO_Card
             m_dev = DASK.Register_Card(Card_Type, CardNumber);
             if (m_dev < 0)
             {
-=======
             //***  Register the IO Card  ***//                      
             m_dev = DASK.Register_Card(Card_Type, CardNumber);
             IO_Dev = m_dev;
             if (m_dev < 0){
->>>>>>> 40ddb0133fe0d5e72bf90fbead786d106f1f2b10
                 Console.WriteLine("Register_Card error!");
             }
 

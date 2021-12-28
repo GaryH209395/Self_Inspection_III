@@ -17,7 +17,7 @@ namespace Self_Inspection_III.TestCommands.IO_Card
             Name = "SetIO_OutputState";
             DeviceType = DeviceTypes.IO_Card;
             Parameters = new List<Parameter>()
-            {                
+            {
                 new Parameter("Specific index of IO Card", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox,""),
                 new Parameter("Specific bit(4~n)", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox, "Note that the first 3 bits are reserved for system use."),
                 new Parameter("Output state", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox, "0:low, 1:high")               
@@ -35,6 +35,15 @@ namespace Self_Inspection_III.TestCommands.IO_Card
             //byte[] Port = Encoding.UTF8.GetBytes(Vars.GetValue(para[1]));
             ushort RelaySwitch = Convert.ToUInt16(Vars.GetValue(para[2]));
 
+            //***  Setting CardNumber/Port/Switch  ***//
+            ushort CardNumber = Convert.ToUInt16(Vars.GetValue(para[0]));
+            byte[] Port = Encoding.UTF8.GetBytes(Vars.GetValue(para[1]));
+            uint Switch = Convert.ToUInt16(Vars.GetValue(para[2]));
+
+            //***  Register the IO Card  ***//                      
+            m_dev = DASK.Register_Card(Card_Type, CardNumber);
+            if (m_dev < 0)
+            {
             //***  Register the IO Card  ***//                      
             m_dev = DASK.Register_Card(Card_Type, CardNumber);
             IO_Dev = m_dev;

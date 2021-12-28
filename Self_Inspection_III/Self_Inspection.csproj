@@ -40,10 +40,10 @@
       <HintPath>..\..\..\MFG System\MFGSystem\Assembly\ChromaSajetConnect.dll</HintPath>
     </Reference>
     <Reference Include="CviVisaDriver">
-      <HintPath>..\..\..\..\source\repos\Self_Inspection_III\Self_Inspection_III\bin\Debug\CviVisaDriver.dll</HintPath>
+      <HintPath>..\..\Self_Inspection_II\CviVisaDriver\bin\x86\Debug\CviVisaDriver.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\source\repos\Self_Inspection_III\Self_Inspection_III\bin\Debug\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\MFG System\MFGSystem\Assembly\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -72,39 +72,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="DataSearch\DlgDatetimePickers.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="DataSearch\DlgDatetimePickers.cs" />
     <Compile Include="DataSearch\DlgDatetimePickers.Designer.cs">
       <DependentUpon>DlgDatetimePickers.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataSearch\UcDataSearch.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="DataSearch\UcDataSearch.cs" />
     <Compile Include="DataSearch\UcDataSearch.Designer.cs">
       <DependentUpon>UcDataSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\DlgEmployeeID.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Dialogs\DlgEmployeeID.cs" />
     <Compile Include="Dialogs\DlgEmployeeID.Designer.cs">
       <DependentUpon>DlgEmployeeID.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\DlgRootMode.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Dialogs\DlgRootMode.cs" />
     <Compile Include="Dialogs\DlgRootMode.Designer.cs">
       <DependentUpon>DlgRootMode.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\DlgSystemSetting.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Dialogs\DlgSystemSetting.cs" />
     <Compile Include="Dialogs\DlgSystemSetting.Designer.cs">
       <DependentUpon>DlgSystemSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\DlgVersionDescription.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Dialogs\DlgVersionDescription.cs" />
     <Compile Include="Dialogs\DlgVersionDescription.Designer.cs">
       <DependentUpon>DlgVersionDescription.cs</DependentUpon>
     </Compile>
@@ -114,103 +102,71 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoadingGIF.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="LoadingGIF.cs" />
     <Compile Include="LoadingGIF.Designer.cs">
       <DependentUpon>LoadingGIF.cs</DependentUpon>
     </Compile>
-    <Compile Include="Management\DlgStationID.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Management\DlgStationID.cs" />
     <Compile Include="Management\DlgStationID.Designer.cs">
       <DependentUpon>DlgStationID.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Management\DlgAddDevice.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Management\DlgAddDevice.cs" />
     <Compile Include="Management\DlgAddDevice.Designer.cs">
       <DependentUpon>DlgAddDevice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Management\DlgAddStation.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Management\DlgAddStation.cs" />
     <Compile Include="Management\DlgAddStation.Designer.cs">
       <DependentUpon>DlgAddStation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Management\DlgAddStationDevice.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Management\DlgAddStationDevice.cs" />
     <Compile Include="Management\DlgAddStationDevice.Designer.cs">
       <DependentUpon>DlgAddStationDevice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Management\UcManagement.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Management\UcManagement.cs" />
     <Compile Include="Management\UcManagement.Designer.cs">
       <DependentUpon>UcManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="SI\DlgArrayEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SI\DlgArrayEditor.cs" />
     <Compile Include="SI\DlgArrayEditor.Designer.cs">
       <DependentUpon>DlgArrayEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="SI\DlgCondiEnumEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SI\DlgCondiEnumEditor.cs" />
     <Compile Include="SI\DlgCondiEnumEditor.Designer.cs">
       <DependentUpon>DlgCondiEnumEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="SI\DlgDevcieList.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SI\DlgDevcieList.cs" />
     <Compile Include="SI\DlgDevcieList.Designer.cs">
       <DependentUpon>DlgDevcieList.cs</DependentUpon>
     </Compile>
-    <Compile Include="SI\DlgImpotFunction.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SI\DlgImpotFunction.cs" />
     <Compile Include="SI\DlgImpotFunction.Designer.cs">
       <DependentUpon>DlgImpotFunction.cs</DependentUpon>
     </Compile>
-    <Compile Include="SI\DlgSetArrayLength.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SI\DlgSetArrayLength.cs" />
     <Compile Include="SI\DlgSetArrayLength.Designer.cs">
       <DependentUpon>DlgSetArrayLength.cs</DependentUpon>
     </Compile>
-    <Compile Include="SI\DlgVariables.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SI\DlgVariables.cs" />
     <Compile Include="SI\DlgVariables.Designer.cs">
       <DependentUpon>DlgVariables.cs</DependentUpon>
     </Compile>
-    <Compile Include="SI\DlgNewItemEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SI\DlgNewItemEditor.cs" />
     <Compile Include="SI\DlgNewItemEditor.Designer.cs">
       <DependentUpon>DlgNewItemEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="SI\SI_TestFunction.cs" />
-    <Compile Include="SI\UcSIItem.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="SI\UcSIItem.cs" />
     <Compile Include="SI\UcSIItem.Designer.cs">
       <DependentUpon>UcSIItem.cs</DependentUpon>
     </Compile>
     <Compile Include="SI\Variables.cs" />
-    <Compile Include="SP\DlgItemList.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SP\DlgItemList.cs" />
     <Compile Include="SP\DlgItemList.Designer.cs">
       <DependentUpon>DlgItemList.cs</DependentUpon>
     </Compile>
-    <Compile Include="SP\UcSIProgram.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="SP\UcSIProgram.cs" />
     <Compile Include="SP\UcSIProgram.Designer.cs">
       <DependentUpon>UcSIProgram.cs</DependentUpon>
     </Compile>
@@ -270,9 +226,7 @@
     <Compile Include="TestCommands\16%29Fluke\SetFluke_OutputValue.cs" />
     <Compile Include="TestCommands\16%29Fluke\WriteFluke_Command.cs" />
     <Compile Include="TestCommands\18%29IO Card\SetIO_OutputState.cs" />
-    <Compile Include="TestCommands\CmdsParameterEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="TestCommands\CmdsParameterEditor.cs" />
     <Compile Include="TestCommands\CmdsParameterEditor.Designer.cs">
       <DependentUpon>CmdsParameterEditor.cs</DependentUpon>
     </Compile>
@@ -286,15 +240,11 @@
     <Compile Include="TestCommands\13%29DMM\ReadDMM_Measure.cs" />
     <Compile Include="TestCommands\13%29DMM\SetDMM_FuncRange.cs" />
     <Compile Include="TestCommands\13%29DMM\WriteDMMDev_Command.cs" />
-    <Compile Include="TestCommands\DlgDelayExS.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="TestCommands\DlgDelayExS.cs" />
     <Compile Include="TestCommands\DlgDelayExS.Designer.cs">
       <DependentUpon>DlgDelayExS.cs</DependentUpon>
     </Compile>
-    <Compile Include="TestCommands\DlgInputTextbox.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="TestCommands\DlgInputTextbox.cs" />
     <Compile Include="TestCommands\DlgInputTextbox.Designer.cs">
       <DependentUpon>DlgInputTextbox.cs</DependentUpon>
     </Compile>

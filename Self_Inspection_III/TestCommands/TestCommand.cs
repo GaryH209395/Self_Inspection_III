@@ -114,10 +114,10 @@ namespace Self_Inspection_III.TestCommands
         {
             return Function(ParaString, ModelName, NIDriver, ref Vars);
         }
-        protected virtual bool Function(string ParaString, string ModelName, ushort Card_Type, out short io_dev, ref ItemVars Vars) { io_dev = 0; return false; }
-        public static bool DoIOFunction(SI_TestFunction Func, ushort Card_Type,out short io_dev, ref ItemVars Vars)
+        protected virtual bool Function(string ParaString, ushort CardNumber, ushort CardType, out short IO_Dev, ref ItemVars Vars) { IO_Dev = 0; return false; }
+        public static bool DoIOFunction(SI_TestFunction Func, ushort CardNumber, ushort CardType, out short IO_Dev, ref ItemVars Vars)
         {
-            io_dev = 0;
+            short io_dev = 0;
             try
             {
                 TestCommand testCommand = TC(Func.TestCommand);
@@ -125,7 +125,7 @@ namespace Self_Inspection_III.TestCommands
                 Console.WriteLine($"=={testCommand.Name}.Function({Func.Parameter}, {Func.Device}, NIDriver, Vars)==");
                 try
                 {
-                    return testCommand.Function(Func.Parameter, Func.Device, Card_Type, out io_dev, ref Vars);
+                    return testCommand.Function(Func.Parameter, CardNumber, CardType, out io_dev, ref Vars);
                 }
                 catch (NullReferenceException nrEx)
                 {
@@ -148,6 +148,7 @@ namespace Self_Inspection_III.TestCommands
                 else
                     MessageBox.Show(ex.ToString());
             }
+            finally { IO_Dev = io_dev; }
             return true;
         }
         public static bool DoFunction(SI_TestFunction Func, CviVisaCtrl NIDriver, ref ItemVars Vars)

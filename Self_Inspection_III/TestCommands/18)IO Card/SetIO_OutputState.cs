@@ -18,7 +18,7 @@ namespace Self_Inspection_III.TestCommands.IO_Card
             DeviceType = DeviceTypes.IO_Card;
             Parameters = new List<Parameter>()
             {                
-                //new Parameter("Specific index of IO Card", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox,""),
+                new Parameter("Specific index of IO Card", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox,""),
                 new Parameter("Specific bit(4~n)", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox, "Note that the first 3 bits are reserved for system use."),
                 new Parameter("Output state", DataTypes.Integer, ParaTypes.Constant, ConstTypes.EditBox, "0:low, 1:high")               
             };

@@ -188,6 +188,7 @@ namespace Self_Inspection_III.Class
         private ColorText m_PF;
         private TestPeriod m_Period;
         private ItemVars m_Vars;
+        private string m_UUT;
         private string m_Source;
         private string m_Meter;
         private List<string> m_Sources;
@@ -200,6 +201,7 @@ namespace Self_Inspection_III.Class
             set => m_Active = value.ToString();
         }
         public string Name { get => m_Name ?? string.Empty; set => m_Name = value; }
+        public string UUT { get => m_UUT ?? string.Empty; set => m_UUT = value; }
         public string Source { get => m_Source ?? string.Empty; set => m_Source = value; }
         public string Meter { get => m_Meter ?? string.Empty; set => m_Meter = value; }
         public TestPeriod Period { get => m_Period; set => m_Period = value; }
@@ -253,6 +255,7 @@ namespace Self_Inspection_III.Class
                     Name = Name,
                     PF = PF,
                     Period = Period,
+                    UUT = UUT,
                     Source = Source,
                     Meter = Meter,
                     Sources = Sources,

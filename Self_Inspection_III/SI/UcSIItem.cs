@@ -416,7 +416,7 @@ namespace Self_Inspection_III.SI
                 foreach (DirectoryInfo di in diTestCommands.GetDirectories())
                 {
                     string key = Regex.Replace(di.Name, @"\d{2}\)", "");
-                    if (!TestCmds.Exists(x=>x.Name==key)) TestCmds.Add(new CommandGroup(key));
+                    if (!TestCmds.Exists(x => x.Name == key)) TestCmds.Add(new CommandGroup(key));
                     foreach (FileInfo fi in di.GetFiles())
                     {
                         int tcIdx = TestCmds.FindIndex(x => x.Name == key);

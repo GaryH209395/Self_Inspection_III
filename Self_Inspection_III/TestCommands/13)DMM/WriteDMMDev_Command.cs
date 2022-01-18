@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using CviVisaDriver;
-using Self_Inspection.Class;
+﻿using CviVisaDriver;
 using Self_Inspection_III.Class;
 using Self_Inspection_III.SI;
+using System.Collections.Generic;
 
 namespace Self_Inspection_III.TestCommands.DMM
 {

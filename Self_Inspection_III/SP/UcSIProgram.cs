@@ -286,6 +286,8 @@ namespace Self_Inspection_III.SP
                             if (tempModel == "Source") tempModel = ThisSPItem.Source;
                             else
                             if (tempModel == "Meter") tempModel = ThisSPItem.Meter;
+                            else
+                            if (tempModel == "UUT") tempModel = ThisSPItem.UUT;
 
                             if (!deviceUsed.Exists(x => x == tempModel))
                             {
@@ -393,8 +395,20 @@ namespace Self_Inspection_III.SP
                                             niDriver = _NIDriver[thisItem.Meter];
                                             func.Device = thisItem.Meter;
                                             break;
+                                        case "UUT":
+                                            niDriver = _NIDriver[thisItem.UUT];
+                                            func.Device = thisItem.UUT;
+                                            break;
                                         default:
-                                            if (!string.IsNullOrEmpty(func.Device))
+                                            if (string.IsNullOrEmpty(func.Device))
+                                            {
+                                                if (func.TestCommand == "GetUUT")
+                                                {
+                                                    niDriver = _NIDriver[thisItem.UUT];
+                                                    func.Device = thisItem.UUT;
+                                                }
+                                            }
+                                            else
                                                 niDriver = _NIDriver[func.Device];
                                             break;
                                     }

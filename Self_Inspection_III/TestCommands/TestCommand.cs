@@ -13,6 +13,7 @@ using Self_Inspection_III.TestCommands.Miscellaneous;
 using Self_Inspection_III.TestCommands.PowerMeter;
 using Self_Inspection_III.TestCommands.StringFunc;
 using Self_Inspection_III.TestCommands.System_FlowControl;
+using Self_Inspection_III.TestCommands.Load;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -194,6 +195,7 @@ namespace Self_Inspection_III.TestCommands
                 case "DelayS": return new DelayS();
                 case "DelayExS": return new DelayExS();
                 case "GetPassFail": return new GetPassFail();
+                case "GetUUT": return new GetUUT();
                 case "Goto": return new Goto();
                 case "If_Then": return new If_Then();
                 case "PauseMsg": return new PauseMsg();
@@ -280,6 +282,12 @@ namespace Self_Inspection_III.TestCommands
                 case "SetFluke_OutputState2": return new SetFluke_OutputState2();
                 case "SetFluke_OutputValue": return new SetFluke_OutputValue();
                 case "WriteFluke_Command": return new WriteFluke_Command();
+                #endregion
+
+                #region Load
+                case "ReadLoadDev_Response": return new ReadLoadDev_Response();
+                case "SetLoad_Mode": return new SetLoad_Mode();
+                case "WriteLoadDev_Command": return new WriteLoadDev_Command();
                 #endregion
 
                 #region IO Card

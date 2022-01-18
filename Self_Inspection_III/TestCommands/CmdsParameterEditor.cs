@@ -48,7 +48,7 @@ namespace Self_Inspection_III.TestCommands
             if (TestCommand.DeviceType == DeviceTypes.Null)
                 cbbDevice.Enabled = false;
             else
-                cbbDevice.Items.AddRange(new object[] { "Source", "Meter" });
+                cbbDevice.Items.AddRange(new object[] { "Source", "Meter", "UUT" });
 
             foreach (Device device in Devices)
                 if (TestCommand.DeviceType == DeviceTypes.All || device.Type == TestCommand.DeviceType.ToString())

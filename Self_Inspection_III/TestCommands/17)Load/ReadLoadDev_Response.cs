@@ -3,17 +3,17 @@ using Self_Inspection_III.Class;
 using Self_Inspection_III.SI;
 using System.Collections.Generic;
 
-namespace Self_Inspection_III.TestCommands.DMM
+namespace Self_Inspection_III.TestCommands.Load
 {
-    class ReadDMMDev_Response : TestCommand
+    class ReadLoadDev_Response : TestCommand
     {
-        public ReadDMMDev_Response()
+        public ReadLoadDev_Response()
         {
-            Name = "ReadDMMDev_Response";
-            DeviceType = DeviceTypes.DMM;
+            Name = "ReadLoadDev_Response";
+            DeviceType = DeviceTypes.Load;
             Parameters = new List<Parameter>()
             {
-                new Parameter("Return value", DataTypes.String, ParaTypes.Result, ConstTypes.NotAllow, "Measurement of DMM.")
+                new Parameter("Return value", DataTypes.String, ParaTypes.Result, ConstTypes.NotAllow, "Measurement of Load.")
             };
         }
 

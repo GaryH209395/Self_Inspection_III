@@ -34,6 +34,18 @@ namespace Self_Inspection_III.SI
 
             isLoad = false;
         }
+        private void Form1_Closing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Save();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                e.Cancel = true;
+            }
+        }
         private void ButtonStyleSetting()
         {
             foreach (ToolStripItem item in toolStrip3.Items)
@@ -71,6 +83,101 @@ namespace Self_Inspection_III.SI
             foreach (ResultVar rv in ItemVars.Results)
                 dgvResult.Rows.Add(new object[] { rv.ShowName, rv.CallName, rv.DataType, rv.SpecMin.CallName, rv.SpecMax.CallName });
         }
+        private void Save()
+        {
+            bool invalid = false;
+
+            CheckDuplicatedCallName();
+            CheckValueType();
+
+            //Condition
+            dgvCondition.EndEdit();
+            if (ItemVars.Conditions.Count > 0) ItemVars.Conditions.Clear();
+            for (int i = 0; i < dgvCondition.RowCount; i++)
+            {
+                invalid = false;
+                for (int col = 0; col < dgvCondition.ColumnCount; col++)
+                {
+                    try
+                    {
+                        if (string.IsNullOrEmpty((dgvCondition[col, i].Value ?? string.Empty).ToString()))
+                            if (col == (int)ColCondiVar.Value)
+                                dgvCondition[col, i].Value = string.Empty;
+                            else
+                                invalid = true;
+                        if (col == (int)ColCondiVar.Enum && dgvCondition[(int)ColCondiVar.EditType, i].Value.ToString() == EditTypes.EditBox.ToString())
+                            invalid = false;
+                    }
+                    catch (Exception ex) { Console.WriteLine($"{dgvCondition[col, i].Value}\n{ex.ToString()}"); }
+                }
+                if (invalid) continue;
+
+                ItemVars.Conditions.Add(new ConditionVar(
+                    dgvCondition[(int)ColCondiVar.ShowName, i].Value.ToString(),
+                    dgvCondition[(int)ColCondiVar.CallName, i].Value.ToString(),
+                    dgvCondition[(int)ColCondiVar.DataType, i].Value.ToString(),
+                    dgvCondition[(int)ColCondiVar.EditType, i].Value.ToString(),
+                    dgvCondition[(int)ColCondiVar.Value, i].Value.ToString(),
+                    dgvCondition[(int)ColCondiVar.Enum, i].Value.ToString()));
+
+                ConditionVar cv = ItemVars.Conditions[i];
+                Console.WriteLine($"Save: {cv.ShowName}, {cv.CallName}, {cv.DataType}, {cv.EditType}, {cv.Value}, {cv.Enum ?? "n/a"}");
+            }
+            Console.WriteLine("Condition Vars Saved!");
+
+            //Temporary
+            dgvTemporary.EndEdit();
+            if (ItemVars.Temporaries.Count > 0) ItemVars.Temporaries.Clear();
+            for (int i = 0; i < dgvTemporary.RowCount; i++)
+            {
+                invalid = false;
+                for (int col = 0; col < dgvTemporary.ColumnCount; col++)
+                    if (string.IsNullOrEmpty(dgvTemporary[col, i].Value.ToString())) invalid = true;
+                if (invalid) continue;
+
+                ItemVars.Temporaries.Add(new TemporaryVar(
+                    dgvTemporary[(int)ColTempVar.ShowName, i].Value.ToString(),
+                    dgvTemporary[(int)ColTempVar.CallName, i].Value.ToString(),
+                    dgvTemporary[(int)ColTempVar.DataType, i].Value.ToString()));
+
+                TemporaryVar tv = ItemVars.Temporaries[i];
+                Console.WriteLine($"{tv.ShowName}, {tv.CallName}, {tv.DataType}");
+            }
+            Console.WriteLine("Temporary Vars Saved!");
+
+            //Result
+            dgvResult.EndEdit();
+            if (ItemVars.Results.Count > 0) ItemVars.Results.Clear();
+            for (int i = 0; i < dgvResult.RowCount; i++)
+            {
+                invalid = false;
+                for (int col = 0; col < dgvResult.ColumnCount; col++)
+                    try { if (string.IsNullOrEmpty(dgvResult[col, i].Value.ToString())) invalid = true; } catch { invalid = true; }
+                if (invalid) continue;
+
+                Variables SpecMin, SpecMax;
+                if (dgvResult[(int)ColResultVar.SpecMin, i].Value == null)
+                    SpecMin = null;
+                else
+                    SpecMin = ItemVars.Conditions[ItemVars.Conditions.FindIndex(x => x.CallName == dgvResult[(int)ColResultVar.SpecMin, i].Value.ToString())];
+
+                if (dgvResult[(int)ColResultVar.SpecMax, i].Value == null)
+                    SpecMax = null;
+                else
+                    SpecMax = ItemVars.Conditions[ItemVars.Conditions.FindIndex(x => x.CallName == dgvResult[(int)ColResultVar.SpecMax, i].Value.ToString())];
+
+                ItemVars.Results.Add(new ResultVar(
+                    dgvResult[(int)ColResultVar.ShowName, i].Value.ToString(),
+                    dgvResult[(int)ColResultVar.CallName, i].Value.ToString(),
+                    dgvResult[(int)ColResultVar.DataType, i].Value.ToString(),
+                    SpecMin,
+                    SpecMax));
+
+                ResultVar rv = ItemVars.Results[i];
+                Console.WriteLine($"{rv.ShowName}, {rv.CallName}, {rv.DataType}, {rv.SpecMin.CallName}, {rv.SpecMax.CallName}");
+            }
+            Console.WriteLine("Result Vars Saved!");
+        }
         #endregion
 
         #region Attributes
@@ -100,99 +207,9 @@ namespace Self_Inspection_III.SI
         private void TsbtnSave_Click(object sender, EventArgs e)
         {
             if (DgvFocused == null) { MessageBox.Show("No Selected Sheet", "Error"); return; }
-            bool invalid = false;
             try
             {
-                CheckDuplicatedCallName();
-                CheckValueType();
-
-                //Condition
-                dgvCondition.EndEdit();
-                if (ItemVars.Conditions.Count > 0) ItemVars.Conditions.Clear();
-                for (int i = 0; i < dgvCondition.RowCount; i++)
-                {
-                    invalid = false;
-                    for (int col = 0; col < dgvCondition.ColumnCount; col++)
-                    {
-                        try
-                        {
-                            if (string.IsNullOrEmpty((dgvCondition[col, i].Value ?? string.Empty).ToString()))
-                                if (col == (int)ColCondiVar.Value)
-                                    dgvCondition[col, i].Value = string.Empty;
-                                else
-                                    invalid = true;
-                            if (col == (int)ColCondiVar.Enum && dgvCondition[(int)ColCondiVar.EditType, i].Value.ToString() == EditTypes.EditBox.ToString())
-                                invalid = false;
-                        }
-                        catch (Exception ex) { Console.WriteLine($"{dgvCondition[col, i].Value}\n{ex.ToString()}"); }
-                    }
-                    if (invalid) continue;
-
-                    ItemVars.Conditions.Add(new ConditionVar(
-                        dgvCondition[(int)ColCondiVar.ShowName, i].Value.ToString(),
-                        dgvCondition[(int)ColCondiVar.CallName, i].Value.ToString(),
-                        dgvCondition[(int)ColCondiVar.DataType, i].Value.ToString(),
-                        dgvCondition[(int)ColCondiVar.EditType, i].Value.ToString(),
-                        dgvCondition[(int)ColCondiVar.Value, i].Value.ToString(),
-                        dgvCondition[(int)ColCondiVar.Enum, i].Value.ToString()));
-
-                    ConditionVar cv = ItemVars.Conditions[i];
-                    Console.WriteLine($"Save: {cv.ShowName}, {cv.CallName}, {cv.DataType}, {cv.EditType}, {cv.Value}, {cv.Enum ?? "n/a"}");
-                }
-                Console.WriteLine("Condition Vars Saved!");
-
-                //Temporary
-                dgvTemporary.EndEdit();
-                if (ItemVars.Temporaries.Count > 0) ItemVars.Temporaries.Clear();
-                for (int i = 0; i < dgvTemporary.RowCount; i++)
-                {
-                    invalid = false;
-                    for (int col = 0; col < dgvTemporary.ColumnCount; col++)
-                        if (string.IsNullOrEmpty(dgvTemporary[col, i].Value.ToString())) invalid = true;
-                    if (invalid) continue;
-
-                    ItemVars.Temporaries.Add(new TemporaryVar(
-                        dgvTemporary[(int)ColTempVar.ShowName, i].Value.ToString(),
-                        dgvTemporary[(int)ColTempVar.CallName, i].Value.ToString(),
-                        dgvTemporary[(int)ColTempVar.DataType, i].Value.ToString()));
-
-                    TemporaryVar tv = ItemVars.Temporaries[i];
-                    Console.WriteLine($"{tv.ShowName}, {tv.CallName}, {tv.DataType}");
-                }
-                Console.WriteLine("Temporary Vars Saved!");
-
-                //Result
-                dgvResult.EndEdit();
-                if (ItemVars.Results.Count > 0) ItemVars.Results.Clear();
-                for (int i = 0; i < dgvResult.RowCount; i++)
-                {
-                    invalid = false;
-                    for (int col = 0; col < dgvResult.ColumnCount; col++)
-                        try { if (string.IsNullOrEmpty(dgvResult[col, i].Value.ToString())) invalid = true; } catch { invalid = true; }
-                    if (invalid) continue;
-
-                    Variables SpecMin, SpecMax;
-                    if (dgvResult[(int)ColResultVar.SpecMin, i].Value == null)
-                        SpecMin = null;
-                    else
-                        SpecMin = ItemVars.Conditions[ItemVars.Conditions.FindIndex(x => x.CallName == dgvResult[(int)ColResultVar.SpecMin, i].Value.ToString())];
-
-                    if (dgvResult[(int)ColResultVar.SpecMax, i].Value == null)
-                        SpecMax = null;
-                    else
-                        SpecMax = ItemVars.Conditions[ItemVars.Conditions.FindIndex(x => x.CallName == dgvResult[(int)ColResultVar.SpecMax, i].Value.ToString())];
-
-                    ItemVars.Results.Add(new ResultVar(
-                        dgvResult[(int)ColResultVar.ShowName, i].Value.ToString(),
-                        dgvResult[(int)ColResultVar.CallName, i].Value.ToString(),
-                        dgvResult[(int)ColResultVar.DataType, i].Value.ToString(),
-                        SpecMin,
-                        SpecMax));
-
-                    ResultVar rv = ItemVars.Results[i];
-                    Console.WriteLine($"{rv.ShowName}, {rv.CallName}, {rv.DataType}, {rv.SpecMin.CallName}, {rv.SpecMax.CallName}");
-                }
-                Console.WriteLine("Result Vars Saved!");
+                Save();
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
@@ -357,7 +374,8 @@ namespace Self_Inspection_III.SI
             {
                 if (dgvCondition[(int)ColCondiVar.DataType, i].Value != null)
                 {
-                    if (!string.IsNullOrEmpty(dgvCondition[(int)ColCondiVar.DataType, i].Value.ToString()))
+                    string default_value = (dgvCondition[(int)ColCondiVar.DataType, i].Value ?? string.Empty).ToString();
+                    if (!string.IsNullOrEmpty(default_value))
                     {
                         switch (dgvCondition[(int)ColCondiVar.DataType, i].Value.ToString())
                         {
@@ -523,7 +541,7 @@ namespace Self_Inspection_III.SI
                         dtypeCmbCell.Items.AddRange(Variables.DataTypesList);
                         dgvTemporary[e.ColumnIndex, e.RowIndex] = dtypeCmbCell;
                         dgvTemporary.ReadOnly = false;
-                        break;                 
+                        break;
                     default:
                         dgvTemporary.ReadOnly = false;
                         dgvTemporary.BeginEdit(false);
@@ -566,6 +584,7 @@ namespace Self_Inspection_III.SI
         private void DgvResult_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             dgvResult.ReadOnly = true;
+
             #region DGV EndEdit
             if (e.ColumnIndex < (int)ColResultVar.DataType || e.ColumnIndex > (int)ColResultVar.SpecMax)
             {

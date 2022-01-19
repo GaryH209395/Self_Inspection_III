@@ -395,6 +395,7 @@ namespace Self_Inspection_III.Class
     {
         Day = 5,
         Week,
+        Month,
         Season
     }
     public enum PF
